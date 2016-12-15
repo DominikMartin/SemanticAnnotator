@@ -1,0 +1,77 @@
+{
+	"name": "SemanticAnnotator",
+	"version": "0.0.0",
+	"author": [
+		"Dominik Martin"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:SemanticAnnotator",
+	"descriptionmsg": "annotator-desc",
+	"license-name": "MIT",
+	"type": "other",
+	"AutoloadClasses": {
+		"SemanticAnnotatorHooks": "SemanticAnnotator.hooks.php",
+		"SemanticAnnotatorSpecial": "specials/SemanticAnnotatorSpecial.php",
+		"SemanticAnnotator": "SemanticAnnotator.php"
+	},
+	"config": {
+		"BoilerPlateEnableFoo": true
+	},
+	"ExtensionMessagesFiles": {
+		"SemanticAnnotatorAlias": "SemanticAnnotator.i18n.alias.php"
+	},
+	"Hooks": {
+		"BeforePageDisplay": [
+			"SemanticAnnotatorHooks::onBeforePageDisplay"
+		]
+	},
+	"MessagesDirs": {
+		"SemanticAnnotator": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"ext.annotator": {
+			"scripts": [
+				"modules/ext.annotator.js"
+			],
+			"styles": [
+				"modules/ext.annotator.css"
+			],
+			"messages": [
+				"helloworld", 
+				"annotate-button-text", 
+				"annotate-button-desc",
+				"annotate-welcome-message",
+				"annotate-godbye-message"
+			],
+			"dependencies": [
+				"mediawiki.jqueryMsg"
+			]
+		},
+		"ext.annotator.module": {
+			"scripts": [
+				"modules/lib/annotator-1.2.10.js",
+				"modules/lib/featherlight.min.js",
+				"modules/lib/json2.js",
+				"modules/ext.annotator.module.smwplugin.js",
+				"modules/ext.annotator.module.util.js",
+				"modules/ext.annotator.module.store.js",
+				"modules/ext.annotator.module.js"
+			],
+			"styles": [
+				"modules/lib/annotator-1.2.10.css",
+				"modules/lib/featherlight.min.css"
+			],
+			"messages": [],
+			"dependencies": []
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "SemanticAnnotator"
+	},
+	"SpecialPages": {
+		"SemanticAnnotator": "SemanticAnnotatorSpecial"
+	},
+	"manifest_version": 1
+}
