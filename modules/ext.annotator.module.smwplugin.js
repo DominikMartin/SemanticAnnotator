@@ -13,7 +13,7 @@ Annotator.Plugin.MediaWiki = function (element) {
             .subscribe("annotationCreated", function (annotation) {
                 tempAnnotation = annotation;
 
-                openPopup(wgScriptPath+'/index.php/Special:FormEdit/TextAnnotation/'+annotation.id, function () {
+                openPopup(wgScriptPath+'/index.php/Special:FormEdit/AnnotationForm/Annotation:Karlsruhe/'+annotation.id, function () {
                     plugin.afterCreation(annotation);
                 });
             })
@@ -41,7 +41,7 @@ Annotator.Plugin.MediaWiki = function (element) {
 		$("iframe").height(iframeContent.find("#content").height()+40);
         // TODO: append comment, category, annotation metadata and annotation type
         //iframeContent.find("#comment").val(annotation.text);
-        //iframeContent.find("#annotation-metadata").val(toJSON(annotation));
+        iframeContent.find('textarea[name="AnnotationTemplate[AnnotationMetadata]"]').val(util.fromJsonToEscaped(annotation));
         // append save functionality
 		iframeContent.find("#wpSave").click(function() {
 			closeIframe();
@@ -55,7 +55,7 @@ Annotator.Plugin.MediaWiki = function (element) {
     plugin.loadAnnotationsFromLocalVar = function () {
         console.info("Load existing annotations...");
         if(annotationsStore.annotations != null && annotationsStore.annotations.length > 0){
-            var clone = jQuery.extend(true, [], annotationsStore.annotations);
+            var clone = $.extend(true, [], annotationsStore.annotations);
             this.annotator.loadAnnotations(clone);
         }
     };
