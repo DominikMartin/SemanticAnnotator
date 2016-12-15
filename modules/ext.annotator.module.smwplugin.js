@@ -31,24 +31,25 @@ Annotator.Plugin.MediaWiki = function (element) {
 
     plugin.afterCreation = function (annotation) {
         var iframeContent = $("iframe").contents();
+        // Replace body content by only the form part
 		iframeContent.find("body").html( iframeContent.find("#content") );
+        // CSS adjustments
 		iframeContent.find("#content").css("border", "none");
 		iframeContent.find("#content").css("margin", 0);
+        // auto scale popup
 		$("iframe").width(iframeContent.find("#content").width());
 		$("iframe").height(iframeContent.find("#content").height()+40);
+        // TODO: append comment, category, annotation metadata and annotation type
+        //iframeContent.find("#comment").val(annotation.text);
+        //iframeContent.find("#annotation-metadata").val(toJSON(annotation));
+        // append save functionality
 		iframeContent.find("#wpSave").click(function() {
 			closeIframe();
 		});
-        //iframeContent.find("h1").html("NEW: "+ annotation.id);
-        //iframeContent.find("#comment").val(annotation.text);
-        //iframeContent.find("#annotation-metadata").val(toJSON(annotation));
     };
 
     plugin.afterUpdate = function (annotation) {
-        /*var iframeContent = $("iframe").contents();
-        iframeContent.find("h1").html("Update: "+ annotation.id);
-        iframeContent.find("#comment").val(annotation.text);
-        iframeContent.find("#annotation-metadata").val(toJSON(annotation));*/
+
     };
 
     plugin.loadAnnotationsFromLocalVar = function () {
