@@ -22,6 +22,9 @@
 	"Hooks": {
 		"BeforePageDisplay": [
 			"SemanticAnnotatorHooks::onBeforePageDisplay"
+		],
+		"CanonicalNamespaces": [
+			"SemanticAnnotatorHooks::onCanonicalNamespaces"
 		]
 	},
 	"MessagesDirs": {
@@ -73,5 +76,18 @@
 	"SpecialPages": {
 		"SemanticAnnotator": "SemanticAnnotatorSpecial"
 	},
+	"namespaces": [
+		{
+			"id": 124,
+			"constant": "NS_ABCD",
+			"name": "Abcd"
+		},
+		{
+			"id": 125,
+			"constant": "NS_ABCD_TALK",
+			"name": "Abcd_talk"
+		}
+	],
+	"callback": "SemanticAnnotatorHooks::afterInit",
 	"manifest_version": 1
 }
