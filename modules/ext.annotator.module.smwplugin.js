@@ -41,6 +41,7 @@ Annotator.Plugin.MediaWiki = function (element) {
 		$("iframe").height(iframeContent.find("#content").height()+40);
         // TODO: append comment, category, annotation metadata and annotation type
         //iframeContent.find("#comment").val(annotation.text);
+        iframeContent.find('textarea[name="AnnotationTemplate[AnnotationComment]"]').val(annotation.text);
         iframeContent.find('textarea[name="AnnotationTemplate[AnnotationMetadata]"]').val(util.fromJsonToEscaped(annotation));
         // append save functionality
 		iframeContent.find("#wpSave").click(function() {
