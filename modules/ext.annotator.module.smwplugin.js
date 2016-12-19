@@ -13,14 +13,14 @@ Annotator.Plugin.MediaWiki = function (element) {
             .subscribe("annotationCreated", function (annotation) {
                 tempAnnotation = annotation;
 
-                openPopup(wgScriptPath+'/index.php/Special:FormEdit/AnnotationForm/Annotation:Karlsruhe/'+annotation.id, function () {
+                openPopup(mw.config.get('wgScript')+'/Special:FormEdit/AnnotationForm/Annotation:Karlsruhe/'+annotation.id, function () {
                     plugin.afterCreation(annotation);
                 });
             })
             .subscribe("annotationUpdated", function (annotation) {
                 tempAnnotation = annotation;
 
-                openPopup(wgScriptPath+'/index.php/Special:FormEdit/TextAnnotation/'+annotation.id, function () {
+                openPopup(mw.config.get('wgScript')+'/Special:FormEdit/TextAnnotation/'+annotation.id, function () {
                     plugin.afterUpdate(annotation);
                 });
             })

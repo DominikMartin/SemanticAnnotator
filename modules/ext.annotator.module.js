@@ -4,7 +4,7 @@
  */
 
 ( function () {
-	var url = wgScriptPath+"/api.php?action=ask&query=[[Category:AnnotationCategory]][[Category:TextAnnotationCategory]][[AnnotationType::Karlsruhe]]|?AnnotationComment|?AnnotationMetadata&format=json";
+	var url = mw.config.get('wgScriptPath')+"/api.php?action=ask&query=[[Category:AnnotationCategory]][[Category:TextAnnotationCategory]][[AnnotationType::Karlsruhe]]|?AnnotationComment|?AnnotationMetadata&format=json";
 	$.getJSON(url, function(json) {
 		var annotations = util.parseAskApiCall(json);
 		annotationsStore.init(annotations);
