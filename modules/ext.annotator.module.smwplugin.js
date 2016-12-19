@@ -13,7 +13,7 @@ Annotator.Plugin.MediaWiki = function (element) {
             .subscribe("annotationCreated", function (annotation) {
                 tempAnnotation = annotation;
 
-                openPopup(mw.config.get('wgScript')+'/Special:FormEdit/AnnotationForm/Annotation:Karlsruhe/'+annotation.id, function () {
+                openPopup(mw.config.get('wgScript')+'/Special:FormEdit/AnnotationForm/Annotation:'+mw.config.get('wgPageName')+'/'+annotation.id, function () {
                     plugin.afterCreation(annotation);
                 });
             })
