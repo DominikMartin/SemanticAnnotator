@@ -8,21 +8,25 @@ Annotator.Plugin.MediaWiki = function (element) {
         this.annotator
             .subscribe("beforeAnnotationCreated", function (annotation) {
                 // TODO: SET ANNOTATION METADATA BEFORE CREATION
-                annotation.id = randomName(10);
+                annotation.id = util.randomName(10);
             })
             .subscribe("annotationCreated", function (annotation) {
                 tempAnnotation = annotation;
 
-                openPopup(mw.config.get('wgScript')+'/Special:FormEdit/AnnotationForm/Annotation:'+mw.config.get('wgPageName')+'/'+annotation.id, function () {
+                plugin.openPopup(mw.config.get('wgScript')+'/Special:FormEdit/AnnotationForm/Annotation:'+mw.config.get('wgPageName')+'/'+annotation.id, function () {
                     plugin.afterCreation(annotation);
                 });
+
+                // TODO: check if tempAnnotation was created correctly
             })
             .subscribe("annotationUpdated", function (annotation) {
                 tempAnnotation = annotation;
 
-                openPopup(mw.config.get('wgScript')+'/Special:FormEdit/AnnotationForm/Annotation:'+mw.config.get('wgPageName')+'/'+annotation.id, function () {
+                plugin.openPopup(mw.config.get('wgScript')+'/Special:FormEdit/AnnotationForm/Annotation:'+mw.config.get('wgPageName')+'/'+annotation.id, function () {
                     plugin.afterUpdate(annotation);
                 });
+
+                // TODO: check if tempAnnotation was updated correctly
             })
             .subscribe("annotationDeleted", function (annotation) {
                 var getTokenUrl = mw.config.get('wgScriptPath')+'/api.php?action=query&meta=tokens&format=json';
@@ -79,6 +83,18 @@ Annotator.Plugin.MediaWiki = function (element) {
             var clone = $.extend(true, [], annotationsStore.annotations);
             this.annotator.loadAnnotations(clone);
         }
+    };
+
+    plugin.openPopup = function(url, afterContentFunction) {
+        $.featherlight(
+            {
+                iframe: url,
+                iframeMaxWidth: '100%',
+                iframeWidth: 800,
+                iframeHeight: 600,
+                // SET CONFIG HERE
+                afterContent: afterContentFunction
+            });
     };
 
     return plugin;

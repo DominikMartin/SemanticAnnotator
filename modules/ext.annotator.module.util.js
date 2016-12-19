@@ -1,28 +1,15 @@
-function randomName(length) {
-    var text = '';
-    var possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    var possibleBig = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-    text += possibleBig.charAt(Math.floor(Math.random() * possibleBig.length));
-    for( var i=0; i < length - 1; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-}
-
-function openPopup(url, afterContentFunction) {
-    $.featherlight(
-        {
-            iframe: url,
-            iframeMaxWidth: '100%',
-            iframeWidth: 800,
-            iframeHeight: 600,
-            // SET CONFIG HERE
-            afterContent: afterContentFunction
-        });
-}
-
 var util = {
+    randomName: function (length) {
+        var text = '';
+        var possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        var possibleBig = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        text += possibleBig.charAt(Math.floor(Math.random() * possibleBig.length));
+        for( var i=0; i < length - 1; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    },
 
     parseAskApiCall: function (json){
         result = [];
