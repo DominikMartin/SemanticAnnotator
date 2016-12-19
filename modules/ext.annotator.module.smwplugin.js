@@ -25,7 +25,11 @@ Annotator.Plugin.MediaWiki = function (element) {
                 });
             })
             .subscribe("annotationDeleted", function (annotation) {
-                console.info("The annotation: %o has just been deleted!", annotation);
+                var getTokenUrl = mw.config.get('wgScriptPath')+'/api.php?action=query&meta=tokens&format=json';
+                $.getJSON(getTokenUrl, function(json) {
+                    var postDeleteUrl = mw.config.get('wgScriptPath')+'/api.php?action=delete&title=Annotation:'+mw.config.get('wgPageName')+'/'+annotation.id;
+                    $.post(postDeleteUrl, { token: json.query.tokens.csrftoken });
+                });
             });
     };
 
