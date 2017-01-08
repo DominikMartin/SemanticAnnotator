@@ -78,14 +78,14 @@
 	},
 	"namespaces": [
 		{
-			"id": 124,
-			"constant": "NS_ABCD",
-			"name": "Abcd"
+			"id": 248,
+			"constant": "NS_ANNOTATION",
+			"name": "Annotation"
 		},
 		{
-			"id": 125,
-			"constant": "NS_ABCD_TALK",
-			"name": "Abcd_talk"
+			"id": 249,
+			"constant": "NS_ANNOTATION_TALK",
+			"name": "Annotation_talk"
 		}
 	],
 	"callback": "SemanticAnnotatorHooks::afterInit",
