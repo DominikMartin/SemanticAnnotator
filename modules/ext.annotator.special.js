@@ -49,13 +49,13 @@ function printTable(categories) {
             }
         });
     });
-    $( row ).append( '<td>..</td>' );
+    $( row ).append( '<td>yellow</td>' );
 
     var button = $( "<button>Add</button>" );
     button.click(function() {
         var name = $( "#new_category_name" ).val();
         var form = $( "#new_category_form" ).val();
-        buildCategoryPageFormRelation(name, form);
+        buildCategoryPageFormRelation(name, form, 'yellow');
     });
     $( row ).append( button );
 }
