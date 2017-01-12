@@ -25,6 +25,9 @@
 		],
 		"CanonicalNamespaces": [
 			"SemanticAnnotatorHooks::onCanonicalNamespaces"
+		],
+		"smwInitProperties": [
+			"SemanticAnnotatorHooks::smwInitProperties"
 		]
 	},
 	"MessagesDirs": {
@@ -56,15 +59,31 @@
 				"modules/lib/annotator-1.2.10.js",
 				"modules/lib/featherlight.min.js",
 				"modules/lib/json2.js",
+				"modules/lib/jquery.i18n.min.js",
 				"modules/ext.annotator.module.smwplugin.js",
+				"modules/ext.annotator.module.api.js",
 				"modules/ext.annotator.module.util.js",
 				"modules/ext.annotator.module.store.js",
+				"modules/lib/plugins/annotator_view/categories.js",
+				"modules/lib/plugins/annotator_view/view_annotator.js",
+				"modules/lib/plugins/annotator_view/locale/en/annotator.js",
 				"modules/ext.annotator.module.js"
 			],
 			"styles": [
 				"modules/lib/annotator-1.2.10.css",
-				"modules/lib/featherlight.min.css"
+				"modules/lib/featherlight.min.css",
+				"modules/lib/plugins/annotator_view/css/style.css"
 			],
+			"messages": [],
+			"dependencies": []
+		},
+		"ext.annotator.special": {
+			"scripts": [
+				"modules/ext.annotator.module.api.js",
+				"modules/ext.annotator.module.util.js",
+				"modules/ext.annotator.special.js"
+			],
+			"styles": [],
 			"messages": [],
 			"dependencies": []
 		}

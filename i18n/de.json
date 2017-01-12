@@ -18,5 +18,9 @@
 	"annotate-button-desc": "Klicken Sie hier um den Artikel annotieren zu können.",
 	"annotate-welcome-message": "Annotator Modus gestartet...",
 	"annotate-godbye-message": "Annotator Modus beendet...",
+	"autogenerate-summary": "Diese Seite wurde automatisch generiert durch die SemanticAnnotator Extension.",
+	"install-description": "Bitte klicken Sie den Installieren Button bevor Sie die Extension verweden.",
+	"install-success": "Installation erfolgreich abgeschlossen.",
+	"install-button-submit": "Installieren...",
 	"helloworld": "Hallo Welt"
 }

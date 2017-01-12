@@ -41,7 +41,28 @@ class SemanticAnnotatorHooks {
 
         $smwgNamespacesWithSemanticLinks[NS_ANNOTATION] = true;
 
+        // Enable PageForms Namespace for SemanticLinks
+        $smwgNamespacesWithSemanticLinks[PF_NS_FORM] = true;
+
         return true;
     }
+
+    public static function smwInitProperties( ) {
+        if ( class_exists( 'SMW\PropertyRegistry' ) ) {
+            SMW\PropertyRegistry::getInstance()->registerProperty ( "___SA_FORM_TYPE_PROPERTY", '_txt', "Form Type", true, true );
+            SMW\PropertyRegistry::getInstance()->registerProperty ( "___SA_CATEGORY_NAME_PROPERTY", '_txt', "SA Category Name", true, true );
+            SMW\PropertyRegistry::getInstance()->registerProperty ( "___SA_CATEGORY_COLOR_PROPERTY", '_txt', "SA Category Color", true, true );
+        }
+        /*echo ""+SMW\PropertyRegistry::getInstance 	( );
+        /*SMW\PropertyRegistry::registerProperty 	($id,
+            $typeId,
+            $label = false,
+            $isVisible = false,
+            $isAnnotable = true
+        );*/
+
+        return true;
+    }
+
 
 }

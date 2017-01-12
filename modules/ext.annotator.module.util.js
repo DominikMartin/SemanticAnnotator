@@ -58,5 +58,26 @@ var util = {
             }
             return val;
         });
+    },
+
+    sliceBeforeRegex: function(text, regex){
+        if(text.match(regex).length > 0){
+            regex.exec(text);
+            return text.substring(regex.lastIndex-text.match(regex)[0].length);
+        }
+        return text;
+    },
+
+    sliceAfterRegex: function(text, regex){
+        if(text.match(regex).length > 0){
+            regex.exec(text);
+            return text.substring(0, regex.lastIndex);
+        }
+        return text;
+    },
+
+    extractTextBetweenRegexes: function (text, regex_start, regex_end) {
+        text = util.sliceBeforeRegex(text, regex_start);
+        return util.sliceAfterRegex(text, regex_end);
     }
 };
