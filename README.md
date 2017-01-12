@@ -13,6 +13,11 @@ Append the following line to the end of your `LocalSettings.php`
 
 	wfLoadExtension( 'SemanticAnnotator' );
 
+Go to Special Page SemanticAnnotator and click the Install Button. After this the Extension is nearly ready to use.
+Now you have to create a PageForms Form (first create some Properties and a Template) and connect it to the SemanticAnnotator. Therefor you have to go to SemanticAnnotator SpecialPage again. Type in a custom Name and select a Form which will be added.
+
+Now you are able to annotate any type of Wiki content by activating AnnotateMode and selecting some text. Have fun :)
+
 ## Code Checking (optional)
 
 This automates the recommended code checkers for PHP and JavaScript code in Wikimedia projects
