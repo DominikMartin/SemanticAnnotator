@@ -129,13 +129,13 @@ class SemanticAnnotatorSpecial extends SpecialPage {
         $text .= '{{{for template|TextAnnotation}}}'."\n";
         $text .= '{| class="formtable"'."\n";
         $text .= '! AnnotationOf: '."\n";
-        $text .= '| {{{field|AnnotationOf|hidden}}}'."\n";
+        $text .= '| {{{field|AnnotationOf}}}'."\n";
         $text .= '|-'."\n";
         $text .= '! AnnotationComment: '."\n";
         $text .= '| {{{field|AnnotationComment}}}'."\n";
         $text .= '|-'."\n";
         $text .= '! AnnotationMetadata: '."\n";
-        $text .= '| {{{field|AnnotationMetadata|hidden}}}'."\n";
+        $text .= '| {{{field|AnnotationMetadata}}}'."\n";
         $text .= '|}'."\n";
         $text .= '{{{end template}}}'."\n";
         $text .= '\'\'\'Free text:\'\'\''."\n";
