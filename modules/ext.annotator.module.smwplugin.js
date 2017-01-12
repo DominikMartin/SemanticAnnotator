@@ -65,6 +65,7 @@ Annotator.Plugin.MediaWiki = function (element) {
 		$("iframe").height(iframeContent.find("#content").height()+40);
         // TODO: append comment, category, annotation metadata and annotation type
         //iframeContent.find("#comment").val(annotation.text);
+        iframeContent.find('input[name="TextAnnotation[AnnotationOf]"]').val(mw.config.get('wgPageName'));
         iframeContent.find('textarea[name="TextAnnotation[AnnotationComment]"]').val(annotation.text);
         iframeContent.find('textarea[name="TextAnnotation[AnnotationMetadata]"]').val(util.fromJsonToEscaped(annotation));
         // append save functionality
@@ -85,6 +86,7 @@ Annotator.Plugin.MediaWiki = function (element) {
         $("iframe").height(iframeContent.find("#content").height()+40);
         // TODO: append comment, category, annotation metadata and annotation type
         //iframeContent.find("#comment").val(annotation.text);
+        iframeContent.find('input[name="TextAnnotation[AnnotationOf]"]').val(mw.config.get('wgPageName'));
         iframeContent.find('textarea[name="TextAnnotation[AnnotationComment]"]').val(annotation.text);
         iframeContent.find('textarea[name="TextAnnotation[AnnotationMetadata]"]').val(util.fromJsonToEscaped(annotation));
         // append save functionality
