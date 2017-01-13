@@ -13,7 +13,7 @@ Annotator.Plugin.MediaWiki = function (element) {
             .subscribe("annotationCreated", function (annotation) {
                 tempAnnotation = annotation;
 
-                var category_form = categoriesMap[annotation.category].replace('Form:', '');
+                var category_form = categoriesMap[annotation.category].replace(/\w+:/g, '');
                 var url = mw.config.get('wgScript')
                     + '/Special:FormEdit/'
                     + category_form
@@ -30,7 +30,7 @@ Annotator.Plugin.MediaWiki = function (element) {
             .subscribe("annotationUpdated", function (annotation) {
                 tempAnnotation = annotation;
 
-                var category_form = categoriesMap[annotation.category].replace('Form:', '');
+                var category_form = categoriesMap[annotation.category].replace(/\w+:/g, '');
                 var url = mw.config.get('wgScript')
                     + '/Special:FormEdit/'
                     + category_form
