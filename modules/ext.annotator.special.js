@@ -80,7 +80,7 @@ function buildCategoryPageFormRelation(name, form, color){
             var regex_end = /\{\{\{end template}}}/g;
             var text_annotation_form_content = util.extractTextBetweenRegexes(sa_form_content, regex_start, regex_end);
 
-            new_form_content = new_form_content.replace('\'\'\'Free text:\'\'\'', text_annotation_form_content + '\n\'\'\'Free text:\'\'\'');
+            new_form_content = new_form_content.replace(/'''[\w\s]+:'''/g, text_annotation_form_content + '\n\'\'\'Free text:\'\'\'');
             new_form_content = new_form_content.replace('</noinclude>', '[[Form Type::SemanticAnnotator]][[SA Category Name::'+name+']][[SA Category Color::'+color+']]\n</noinclude>');
 
             api.createPage(form, new_form_content, function () {
