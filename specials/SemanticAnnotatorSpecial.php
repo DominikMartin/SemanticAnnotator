@@ -23,15 +23,15 @@ class SemanticAnnotatorSpecial extends SpecialPage {
 
 		$out->setPageTitle( $this->msg( 'annotator-special-title' ) );
 
-		//$out->addHelpLink( $this->msg( 'help' ) );
-
 		$out->addWikiMsg( 'annotator-special-intro' );
+
+        $installForm = HTMLForm::factory( 'ooui', [], $this->getContext(), 'install-form' );
 
         if( !self::pageExists( 'Form:TextAnnotation' ) )
         {
+            $out->addWikiText( '== '.$this->msg( 'install' ).' ==' );
             $out->addWikiMsg( 'install-description' );
 
-            $installForm = HTMLForm::factory( 'ooui', [], $this->getContext(), 'install-form' );
             $installForm->setSubmitTextMsg( 'install-button-submit' );
             $installForm->setSubmitCallback( [ 'SemanticAnnotatorSpecial', 'install' ] );
 
@@ -39,34 +39,10 @@ class SemanticAnnotatorSpecial extends SpecialPage {
         }
         else
         {
-            $out->addHTML('<h2>Annotation Categories:</h2>');
-            $out->addHTML('<div id="sa-categories" class="oo-ui-layout"></div>');
+            $out->addWikiText( '== '.$this->msg( 'category-pageform-assignment' ).' ==' );
+            $out->addWikiMsg( 'category-pageform-assignment-description' );
+            $out->addHTML( '<div id="sa-categories" class="oo-ui-panelLayout-padded oo-ui-panelLayout-framed">'.$this->msg( 'loading' ).'</div>' );
 
-            $formDescriptor = [
-                'name_field' => [
-                    'section' => 'section1',
-                    'label-message' => 'form-field-name',
-                    'type' => 'text',
-                    'default' => 'Name',
-                ],
-                'select_field' => [
-                    'class' => 'HTMLSelectField',
-                    'section' => 'section1',
-                    'label-message' => 'form-field-select',
-                    'options' => [
-                        'Support Task' => 'support_task',
-                        'Help Task' => 'help_task',
-                        'Special Task' => 'speial_task'
-                    ],
-                ]
-            ];
-
-            $htmlForm = HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext(), 'form' );
-
-            $htmlForm->setSubmitTextMsg( 'form-button-submit' );
-            $htmlForm->setSubmitCallback( [ 'SemanticAnnotatorSpecial', 'trySubmit' ] );
-
-            $htmlForm->show();
         }
 
         $out->addModules( 'ext.annotator.special' );

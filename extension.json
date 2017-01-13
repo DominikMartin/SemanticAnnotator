@@ -83,8 +83,17 @@
 				"modules/ext.annotator.module.util.js",
 				"modules/ext.annotator.special.js"
 			],
-			"styles": [],
-			"messages": [],
+			"styles": [
+				"modules/lib/bootstrap.css"
+			],
+			"messages": [
+				"category",
+				"pageforms-form",
+				"color",
+				"add",
+				"delete",
+				"add-new-pageforms-form"
+			],
 			"dependencies": []
 		}
 	},

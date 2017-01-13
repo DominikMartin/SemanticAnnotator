@@ -13,9 +13,10 @@ api.getAllCategoryPageForms(function(results) {
 });
 
 function printTable(categories) {
-    $( "#sa-categories" ).append( '<table id="categories-table"><tr></tr></table>' );
+    $( "#sa-categories" ).empty();
+    $( "#sa-categories" ).append( '<table id="categories-table" class="table table-sm table-hover" style="margin-bottom: 0px;"><tr></tr></table>' );
     // TODO: localization
-    $( "#categories-table tr" ).append( '<th>Category</th><th>PageForms Form</th><th>Color</th><th></th>' );
+    $( "#categories-table tr" ).append( '<th>'+mw.msg('category')+'</th><th>'+mw.msg('pageforms-form')+'</th><th>'+mw.msg('color')+'</th><th></th>' );
     categories.forEach(function(category) {
         var row = $( "<tr></tr>" );
         $( "#categories-table" ).append(row);
@@ -24,18 +25,19 @@ function printTable(categories) {
         $( row ).append( '<td><a href="' + category.form_url + '">' + category.form + '</a></td>' );
         $( row ).append( '<td>' + category.color + '</td>' );
 
-        var button = $( "<button>Delete</button>" );
+        var button = $( '<button class="btn btn-danger">'+mw.msg('delete')+'</button>' );
         button.click(function() {
-            deleteCategoryPageFormRelation(category.name, category.form, category.color);
+            deleteCategoryPageFormAssignment(category.name, category.form, category.color);
         });
-        $( row ).append( button );
+        var button_col = $( '<td style="text-align: right;"></td>' ).append( button );
+        $( row ).append( button_col );
     });
 
     var row = $( "<tr></tr>" );
     $( "#categories-table" ).append(row);
 
-    $( row ).append( '<td><input id="new_category_name" type="text"></td>' );
-    $( row ).append( '<td><select id="new_category_form" ></select></td>' );
+    $( row ).append( '<td><input id="new_category_name" class="form-control" type="text"></td>' );
+    $( row ).append( '<td><select id="new_category_form" class="form-control"></select></td>' );
 
     var categories_form = categories.map(function (item) {
         return item.form;
@@ -51,16 +53,17 @@ function printTable(categories) {
     });
     $( row ).append( '<td>yellow</td>' );
 
-    var button = $( "<button>Add</button>" );
+    var button = $( '<button class="btn btn-primary">'+mw.msg('add')+'</button>' );
     button.click(function() {
         var name = $( "#new_category_name" ).val();
         var form = $( "#new_category_form" ).val();
-        buildCategoryPageFormRelation(name, form, 'yellow');
+        buildCategoryPageFormAssignment(name, form, 'yellow');
     });
-    $( row ).append( button );
+    var button_col = $( '<td style="text-align: right;"></td>' ).append( button );
+    $( row ).append( button_col );
 }
 
-function deleteCategoryPageFormRelation(name, form, color){
+function deleteCategoryPageFormAssignment(name, form, color){
     api.getPageContent(form, function (old_form_content) {
         old_form_content = old_form_content.replace('[[Form Type::SemanticAnnotator]][[SA Category Name::'+name+']][[SA Category Color::'+color+']]\n', '');
         // TODO: remove text annotation template
@@ -70,7 +73,7 @@ function deleteCategoryPageFormRelation(name, form, color){
     });
 }
 
-function buildCategoryPageFormRelation(name, form, color){
+function buildCategoryPageFormAssignment(name, form, color){
     if(name.length < 1 || form.length < 1){
         return;
     }
