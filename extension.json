@@ -60,13 +60,15 @@
 				"modules/lib/featherlight.min.js",
 				"modules/lib/json2.js",
 				"modules/lib/jquery.i18n.min.js",
+				"modules/lib/jquery-dateFormat.min.js",
+				"modules/lib/plugins/annotator.permissions.js",
+				"modules/lib/plugins/annotator_view/categories.js",
+				"modules/lib/plugins/annotator_view/view_annotator.js",
+				"modules/lib/plugins/annotator_view/locale/en/annotator.js",
 				"modules/ext.annotator.module.smwplugin.js",
 				"modules/ext.annotator.module.api.js",
 				"modules/ext.annotator.module.util.js",
 				"modules/ext.annotator.module.store.js",
-				"modules/lib/plugins/annotator_view/categories.js",
-				"modules/lib/plugins/annotator_view/view_annotator.js",
-				"modules/lib/plugins/annotator_view/locale/en/annotator.js",
 				"modules/ext.annotator.module.js"
 			],
 			"styles": [
