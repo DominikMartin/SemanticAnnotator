@@ -55,9 +55,8 @@ function initAnnotator(){
 		content.annotator('addPlugin', 'AnnotatorViewer');
 		content.annotator('addPlugin', 'Search');
 		content.annotator('addPlugin', 'MediaWiki');
-
-		console.log(categories);
 	}
+	$('.annotator-loading').hide();
 }
 
 var categoriesMap = new Object();
