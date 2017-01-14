@@ -57,8 +57,7 @@ Annotator.Plugin.Search = (function (_super) {
     }
 
     Search.prototype.events = {
-        'annotationsLoaded': 'onAnnotationsLoaded',
-        '.annotator-panel-reset click': "onResetSearch"
+        'annotationsLoaded': 'onAnnotationsLoaded'
     };
 
     Search.prototype.pluginInit = function () {
@@ -78,8 +77,8 @@ Annotator.Plugin.Search = (function (_super) {
         //Adding search capabilities to the annotator Viewer
         if (typeof(this.annotator.plugins.AnnotatorViewer)!='undefined') {
          //Adding a input box for search
-            $('li.filter-panel').before('<input class="search" id="search" type="text" results/><a class="annotator-panel-reset" href="#clear">Reset</a>');
-            $('input#search').on('change',this.searchAnnotator);
+            $('li.filter-panel').before('<input class="search" id="search" type="text" results/>');
+            $('input#search').on('keyup',this.searchAnnotator);
         }
     };
 

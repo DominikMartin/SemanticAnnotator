@@ -53,6 +53,7 @@ function initAnnotator(){
 
 		content.annotator('addPlugin', 'Categories', categories);
 		content.annotator('addPlugin', 'AnnotatorViewer');
+		content.annotator('addPlugin', 'Search');
 		content.annotator('addPlugin', 'MediaWiki');
 
 		console.log(categories);
