@@ -24,9 +24,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   //constants
-  var IMAGE_DELETE =  '../src/img/icono_eliminar.png',
-  IMAGE_DELETE_OVER = '../src/img/papelera_over.png',
-  SHARED_ICON = '../src/img/shared-icon.png';
+  var IMAGE_DELETE =  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAYAAAA/I0V3AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwMS8zMC8xNOF8Y1wAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAAUUlEQVQokWP8//8/AzIwMTFBFWBgYDhz5gwjMp/R2NgYQxEhwESqBgYGBgZGdOcRA1hgDGx+QQcwv5HlPAxNhw4dwkrj1USWTSNVEzxF0DxyAWXVHX5du0wBAAAAAElFTkSuQmCC',
+  IMAGE_DELETE_OVER = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAYAAAA/I0V3AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwMS8zMC8xNOF8Y1wAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAATElEQVQokWP8//8/AwpgZEQTYGBg+P+fEUXJfwYGTEUEABOpGiA2oTuPCMCC0I7FL+gA6jeynIeh6dvXr1hpvJrIsmmkakKkCFpHLgA3MhyyweID4gAAAABJRU5ErkJggg==',
+  SHARED_ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAKCAYAAAC9vt6cAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAAWdEVYdENyZWF0aW9uIFRpbWUAMDEvMTYvMTS+12/gAAABZUlEQVQokW2RMUhCARCGP/XZ9LBsF8yp0LFBIrTltpoEHzYGbQ0O4dYSQS4OTkFN4iS4BsFFQxTZUpOWtDgGhtRzCOupLb54mbfd/f//wd35xuMxs0pEFoA4MA98AE+q2pv2+aYBIrIJ7AMpwOeRxsA1cKSql/8AIhICTgELIBaLUSgUvqPRqNHv94e1Ws2o1+tu7gzYU9Uv/yS8Ajy64UAgQKlUcjqdzn02m31vt9t2LpcbpdNpF7AL1EVkzi8iG8AdEHPVRCLBYDB4LRaL67Zth03TXOz1eq+ZTObTs9IWUPMD55ND/ZZhGASDwYDb5/N5Wq3Wi+M4w6kbLvuBbSANnLjTZrOJbduhcrl8E4/Hny3Luk2lUivVatX0hK+AtT9fEJEdoAyYkUgEy7L6yWSSbrfrVCqVcKPRABgCx8Chqn7PeuPSxJABDI80Ai6AA1V9cIf/AB5QGFgFQoANPKrq27TvB1mLjMh9chb6AAAAAElFTkSuQmCC',
+  EDIT_ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB60lEQVR42mNkIAHw8fFxycnJ9b1//37a06dPL4HEGEkxQEZGxkVERGQnkPnvz58/s1+8eFFHtAGamppFrKysIv/+/dvLzMzczMjIaAkUfkqUAeLi4kqSkpJXgUwmIH779+/fqv/////9/fs3D1EG6OrqrmNiYhID+tsd6IVSDg6OMqABl+/fv+9M0ABgoDkJCQntevPmjfmTJ0/OgsT09fXXAyml27dvG+E1gIuLi1lVVfU80Mmnr1y5kgwSk5aWNhYVFT0JjAm3hw8f7sNrgJqaWhbQkHagzWpAF7yE2n4E6PyXly5dCsYbjUBnCwKdf+vHjx/dN27c6AKJKSsrR/Ly8s4DRp82EN/Da4C2tvZEYLR53b17V/vz58+/QIlISUnpxq9fv5Zcu3atCqYOqwHAKNMCRt2Fjx8/hgNDej00HTSws7OnPnjwQP3Dhw9f8BoAjLYlwMQSDYzn6c+fP69kYWHhl5KSuv7ly5esO3fuLERWi9UALS2tuWxsbElQ7isgfgsMuM+3bt2y+P79+3+CBgADqxIYWG1IQv/evn1r/fjx4xPoahmBGcQPSDPDBIA2XODk5DQGprjVQO5fYNrfDQyLKcA434rNMkZgaIMUssAEgCE+++vXrzeABiS9e/duzuvXrx/gSysAfu/VCjmyfS4AAAAASUVORK5CYII=';
 
   Annotator.Plugin.AnnotatorViewer = (function(_super) {
     __extends(AnnotatorViewer, _super);
@@ -197,7 +198,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
         tinymce.remove("#textarea-"+current_annotation.id);
      
         var textAnnotation = '<div class="anotador_text" '+styleHeight+'>' + current_annotation.text + '</div>';
-        var anotacio_capa =  '<div class="annotator-marginviewer-text"><div class="'+current_annotation.category+' anotator_color_box"></div>'+ textAnnotation  + '</div>';
+        var anotacio_capa =  '<div class="annotator-marginviewer-text"><div class="'+categories[current_annotation.category]+' anotator_color_box"></div>'+ textAnnotation  + '</div>';
         var textAreaEditor = $('li#annotation-'+current_annotation.id + ' > .annotator-marginviewer-text');
        
         textAreaEditor.replaceWith(anotacio_capa);
@@ -239,15 +240,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
     AnnotatorViewer.prototype.onAnnotationsLoaded = function(annotations) {
       var annotation;
-      $('#count-anotations').text( $(".container-anotacions").find('.annotator-marginviewer-element').length );
       if (annotations.length > 0) {
         for(i=0, len = annotations.length; i < len; i++) {
           annotation = annotations[i];
           this.createReferenceAnnotation(annotation);   
         }
-        
       }
-      
+      $('#count-anotations').text( $(".container-anotacions").find('.annotator-marginviewer-element').length );
     };
 
     
@@ -264,7 +263,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
       var shared_annotation = "";      
       var class_label = "label";
-      var delete_icon = "<img src=\""+IMAGE_DELETE+"\" class=\"annotator-viewer-delete\" title=\""+ i18n_dict.Delete +"\" style=\" float:right;margin-top:3px;;margin-left:3px\"/><img src=\"../src/img/edit-icon.png\"   class=\"annotator-viewer-edit\" title=\"Edit\" style=\"float:right;margin-top:3px\"/>";
+      var delete_icon = "<img src=\""+IMAGE_DELETE+"\" class=\"annotator-viewer-delete\" title=\""+ i18n_dict.Delete +"\" style=\" float:right;margin-top:3px;;margin-left:3px\"/><img src=\""+EDIT_ICON+"\" class=\"annotator-viewer-edit\" title=\"Edit\" style=\"float:right;margin-top:3px\"/>";
       
       if (annotation.estat==1 || annotation.permissions.read.length===0 ) {
         shared_annotation = "<img src=\""+SHARED_ICON+"\" title=\""+ i18n_dict.share +"\" style=\"margin-left:5px\"/>"
@@ -277,13 +276,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
         //If you have instal.led a plug-in for categorize anotations, panel viewer can get this information with the category atribute
       if (annotation.category != null) {
-        anotation_color = annotation.category;
+        anotation_color = categories[annotation.category];
       } else {
         anotation_color = "hightlight";
       }
       var textAnnotation = annotation.text;
       var annotation_layer =  '<div class="annotator-marginviewer-text"><div class="'+anotation_color+' anotator_color_box"></div>';
-      annotation_layer += '<div class="anotador_text">'+  textAnnotation  + '</div></div><div class="annotator-marginviewer-date">'+ $.format.date(annotation.data_creacio, "dd/MM/yyyy HH:mm:ss") + '</div><div class="annotator-marginviewer-quote">'+ annotation.quote + '</div><div class="annotator-marginviewer-footer"><span class="'+class_label+'">' + annotation.user + '</span>'+shared_annotation+delete_icon+'</div>';
+      annotation_layer += '<div class="anotador_text">'+  textAnnotation  + '</div></div><div class="annotator-marginviewer-date">'+ $.format.date(annotation.data_creacio, "dd/MM/yyyy HH:mm:ss") + '</div><div class="annotator-marginviewer-quote">'+ annotation.quote + '</div><div class="annotator-marginviewer-footer"><span class="'+class_label+'">' + annotation.user.name + '</span>'+shared_annotation+delete_icon+'</div>';
       
 
 

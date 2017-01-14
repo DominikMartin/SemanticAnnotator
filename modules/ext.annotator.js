@@ -2,7 +2,7 @@
  * Annotator Extension Main Script
  * Author: DominikMartin, BenjaminHosenfeld
  */
-mw.notify( $('<span>Hallo ' + mediaWiki.user.getName() + ',<br>Sie können Annotator nun benutzen indem Sie auf '+mw.msg('annotate-button-text')+' klicken...</span>') );
+mw.notify( $('<span>Hallo ' + mw.user.getName() + ',<br>Sie können Annotator nun benutzen indem Sie auf '+mw.msg('annotate-button-text')+' klicken...</span>') );
 
 // flag representing the status of annotator mode
 var loaded = false;
