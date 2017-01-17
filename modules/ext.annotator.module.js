@@ -1,6 +1,6 @@
 /**
  * Annotator Extension Module Script
- * Author: DominikMartin
+ * Author: DominikMartin, BenjaminHosenfeld
  */
 
 ( function () {

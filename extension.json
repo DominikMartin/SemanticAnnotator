@@ -2,7 +2,8 @@
 	"name": "SemanticAnnotator",
 	"version": "0.0.0",
 	"author": [
-		"Dominik Martin"
+		"Dominik Martin",
+		"Benjamin Hosenfeld"
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:SemanticAnnotator",
 	"descriptionmsg": "annotator-desc",
@@ -84,6 +85,7 @@
 				"modules/ext.annotator.special.js"
 			],
 			"styles": [
+				"modules/ext.annotator.style_special.css",
 				"modules/lib/bootstrap.css"
 			],
 			"messages": [

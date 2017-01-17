@@ -23,7 +23,7 @@ function printTable(categories) {
 
         $( row ).append( '<td>' + category.name + '</td>' );
         $( row ).append( '<td><a href="' + category.form_url + '">' + category.form + '</a></td>' );
-        $( row ).append( '<td>' + category.color + '</td>' );
+		$( row ).append( '<td><span class="special-color-preview-'+category.color+'"></span></td>' );
 
         var button = $( '<button class="btn btn-danger">'+mw.msg('delete')+'</button>' );
         button.click(function() {
@@ -51,13 +51,23 @@ function printTable(categories) {
             }
         });
     });
-    $( row ).append( '<td>yellow</td>' );
-
+	// set all color options
+    $( row ).append( '<td><select id="new_category_color" class="form-control">'+
+		'<option class="special-color-preview-red" value="red">red</option>'+
+		'<option class="special-color-preview-green" value="green">green</option>'+
+		'<option class="special-color-preview-yellow" value="yellow">yellow</option>'+
+		'<option class="special-color-preview-blue" value="blue">blue</option>'+
+		'<option class="special-color-preview-grey" value="grey">grey</option>'+
+		'<option class="special-color-preview-box" value="box">box</option>'+
+		'</select></td>' );
+	
     var button = $( '<button class="btn btn-primary">'+mw.msg('add')+'</button>' );
     button.click(function() {
         var name = $( "#new_category_name" ).val();
         var form = $( "#new_category_form" ).val();
-        buildCategoryPageFormAssignment(name, form, 'yellow');
+		var temp = document.getElementById("new_category_color");
+		var color = temp.options[temp.selectedIndex].value;
+		buildCategoryPageFormAssignment(name, form, color);
     });
     var button_col = $( '<td style="text-align: right;"></td>' ).append( button );
     $( row ).append( button_col );
