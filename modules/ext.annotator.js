@@ -18,8 +18,9 @@ var loaded = false;
 		
 		if(loaded){
 			mw.loader.using( 'ext.annotator.module' ).then( function () {
-				// refresh the status icon TODO: fix the refresh
-				document.getElementById('ca-annotate_icon').refresh;
+				// change the status icon
+				$('#ca-annotate_icon').remove();
+				$('#p-views>ul').append('<li id="ca-annotate_icon"><span><a href="#" title="'+mw.msg('annotate-icon-desc')+'" accesskey="a" class="status_'+loaded+'"></a></span></li>');
 				// if module is loaded message will pop up
 				mw.notify( mw.message('annotate-welcome-message') );
 			} );
@@ -34,9 +35,9 @@ var loaded = false;
 	$('#ca-annotate_icon').click(function() {
 		
 		if(loaded){
-			mw.notify( $(mw.msg('status-on')) );
+			mw.notify( mw.message('status-on') );
 		} else{
-			mw.notify( $(mw.msg('status-off')) );
+			mw.notify( mw.message('status-off') );
 		}
 	});
 }() );

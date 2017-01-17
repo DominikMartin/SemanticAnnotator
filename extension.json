@@ -48,8 +48,11 @@
 				"helloworld", 
 				"annotate-button-text", 
 				"annotate-button-desc",
+				"annotate-icon-desc",
 				"annotate-welcome-message",
-				"annotate-godbye-message"
+				"annotate-godbye-message",
+				"status-on",
+				"status-off"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg"
