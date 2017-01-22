@@ -50,9 +50,7 @@
 				"annotate-button-desc",
 				"annotate-icon-desc",
 				"annotate-welcome-message",
-				"annotate-godbye-message",
-				"status-on",
-				"status-off"
+				"annotate-godbye-message"
 			],
 			"dependencies": [
 				"mediawiki.jqueryMsg"

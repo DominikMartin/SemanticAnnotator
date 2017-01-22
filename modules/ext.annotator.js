@@ -9,35 +9,23 @@ var loaded = false;
 
 ( function () {
 	// append annotate button and status to menu
-	$('#p-views>ul').append('<li id="ca-annotate"><span><a href="#" title="'+mw.msg('annotate-button-desc')+'" accesskey="a">'+mw.msg('annotate-button-text')+'</a></span></li>');
-	$('#p-views>ul').append('<li id="ca-annotate_icon"><span><a href="#" title="'+mw.msg('annotate-icon-desc')+'" accesskey="a" class="status_'+loaded+'"></a></span></li>');
-	
+	$('#p-views>ul').append('<li id="ca-annotate"><span><a href="#" title="'+mw.msg('annotate-button-desc')+'" accesskey="a">'+mw.msg('annotate-button-text')+'</a><i class="fa fa-check" aria-hidden="true"></i></span></li>');
+
 	// do if annotate button is clicked
 	$('#ca-annotate').click(function() {
 		loaded = !loaded;
 		
 		if(loaded){
 			mw.loader.using( 'ext.annotator.module' ).then( function () {
-				// change the status icon
-				$('#ca-annotate_icon').remove();
-				$('#p-views>ul').append('<li id="ca-annotate_icon"><span><a href="#" title="'+mw.msg('annotate-icon-desc')+'" accesskey="a" class="status_'+loaded+'"></a></span></li>');
+                $( '#ca-annotate' ).addClass( 'selected' );
 				// if module is loaded message will pop up
 				mw.notify( mw.message('annotate-welcome-message') );
 			} );
 		}else{
 			//$('#content').annotator('destroy');
+            $( '#ca-annotate' ).removeClass( 'selected' );
 			mw.notify( mw.message('annotate-godbye-message') );
 			location.reload();
-		}
-	});
-	
-	// do if annotate icon is clicked
-	$('#ca-annotate_icon').click(function() {
-		
-		if(loaded){
-			mw.notify( mw.message('status-on') );
-		} else{
-			mw.notify( mw.message('status-off') );
 		}
 	});
 }() );
