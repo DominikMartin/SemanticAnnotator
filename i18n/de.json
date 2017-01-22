@@ -30,5 +30,10 @@
 	"delete": "Löschen",
 	"loading": "Lädt...",
 	"status-on": "Annotator aktiviert",
-	"status-off": "Annotator deaktiviert"
+	"status-off": "Annotator deaktiviert",
+	"red": "rot",
+	"yellow": "gelb",
+	"green": "grün",
+	"blue": "blau",
+	"grey": "grau"
 }

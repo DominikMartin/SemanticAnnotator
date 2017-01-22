@@ -88,15 +88,21 @@
 				"modules/ext.annotator.special.js"
 			],
 			"styles": [
+				"modules/lib/bootstrap.css",
 				"modules/ext.annotator.style_special.css",
-				"modules/lib/bootstrap.css"
+				"modules/lib/plugins/annotator_view/css/style.css"
 			],
 			"messages": [
 				"category",
 				"pageforms-form",
 				"color",
 				"add",
-				"delete"
+				"delete",
+				"red",
+				"yellow",
+				"green",
+				"blue",
+				"grey"
 			],
 			"dependencies": []
 		}
