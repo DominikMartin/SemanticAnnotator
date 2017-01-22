@@ -1,6 +1,6 @@
 /**
  * Annotator Extension Locale Script
- * Author: Dominik Martin
+ * Author: Dominik Martin, BenjaminHosenfeld
  */
 
 /*$.when( mw.loader.using( [ 'mediawiki.api.messages', 'mediawiki.jqueryMsg' ] ), $.ready )

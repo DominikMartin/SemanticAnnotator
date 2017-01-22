@@ -13,6 +13,10 @@ api.getAllCategoryPageForms(function(results) {
 });
 
 function printTable(categories) {
+    // Set all highlight colors here.
+    // Append css class '.annotator-hl-COLOR' to modules/lib/plugins/annotator_view/css/style.css
+    // and add translation
+    var hl_colors = ['red', 'yellow', 'green', 'blue', 'grey'];
     $( "#sa-categories" ).empty();
     $( "#sa-categories" ).append( '<table id="categories-table" class="table table-sm table-hover" style="margin-bottom: 0px;"><tr></tr></table>' );
     // TODO: localization
@@ -23,7 +27,7 @@ function printTable(categories) {
 
         $( row ).append( '<td>' + category.name + '</td>' );
         $( row ).append( '<td><a href="' + category.form_url + '">' + category.form + '</a></td>' );
-        $( row ).append( '<td>' + category.color + '</td>' );
+		$( row ).append( '<td><span class="special-color-preview annotator-hl-'+category.color+'"></span></td>' );
 
         var button = $( '<button class="btn btn-danger">'+mw.msg('delete')+'</button>' );
         button.click(function() {
@@ -51,13 +55,31 @@ function printTable(categories) {
             }
         });
     });
-    $( row ).append( '<td>yellow</td>' );
+    $( row ).append( '<td><select id="new_category_color" class="form-control"></select></td>' );
 
+    $( '#new_category_color' ).addClass('annotator-hl-' + hl_colors[0]);
+
+    var hl_color_classes = '';
+    hl_colors.forEach(function (color) {
+        hl_color_classes += 'annotator-hl-' + color + ' '
+    });
+
+    hl_colors.forEach(function (color) {
+        var color_option = $( '<option class="annotator-hl-' + color + '" value="' + color + '">' + mw.msg(color) + '</option>' );
+        $( '#new_category_color' ).append( color_option );
+        $( '#new_category_color' ).change(function () {
+            var selected_color = $( "#new_category_color" ).val();
+            $( '#new_category_color' ).removeClass(hl_color_classes);
+            $( '#new_category_color' ).addClass('annotator-hl-' + selected_color);
+        });
+    });
+	
     var button = $( '<button class="btn btn-primary">'+mw.msg('add')+'</button>' );
     button.click(function() {
         var name = $( "#new_category_name" ).val();
         var form = $( "#new_category_form" ).val();
-        buildCategoryPageFormAssignment(name, form, 'yellow');
+        var color = $( "#new_category_color" ).val();
+		buildCategoryPageFormAssignment(name, form, color);
     });
     var button_col = $( '<td style="text-align: right;"></td>' ).append( button );
     $( row ).append( button_col );

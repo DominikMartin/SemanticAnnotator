@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"DominikMartin"
+			"DominikMartin",
+			"BenjaminHosenfeld"
 		]
 	},
 	"semanticannotator": "SemanticAnnotator",
@@ -11,6 +12,7 @@
 	"annotator-special-intro": "Willkommen auf der Spezialseite der Erweiterung „SemanticAnnotator“.",
 	"annotate-button-text": "Annotieren",
 	"annotate-button-desc": "Klicken Sie hier um den Artikel annotieren zu können.",
+	"annotate-icon-desc": "Annotator Status",
 	"annotate-welcome-message": "Annotator Modus gestartet...",
 	"annotate-godbye-message": "Annotator Modus beendet...",
 	"install": "Installation",
@@ -26,5 +28,10 @@
 	"color": "Farbe",
 	"add": "Hinzufügen",
 	"delete": "Löschen",
-	"loading": "Lädt..."
+	"loading": "Lädt...",
+	"red": "rot",
+	"yellow": "gelb",
+	"green": "grün",
+	"blue": "blau",
+	"grey": "grau"
 }
