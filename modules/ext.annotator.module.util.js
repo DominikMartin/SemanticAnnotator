@@ -82,6 +82,12 @@ var util = {
     },
 	
 	extractTextBetweenIndexes: function (text, index_start, index_end) {
+		// Consider cases in which the user (accidently) marked a previous or following whitespace
+		if (text[index_start] == " ") {
+			index_start++;
+		} else if (text[index_end] == " ") {
+			index_end--;
+		}
 		return text.substring(index_start, index_end);
 	},
 	
@@ -122,7 +128,7 @@ var util = {
 				//Hier rufe ich suggestFit nur zum Test auf				
 				//matches = util.suggestFit(prop.quote, page_content);
 				matches.forEach(function(index) {
-					console.log(page_content.substr(index, prop.quote.length)+" is a fitting string at the position "+index);
+					console.log("\""+page_content.substr(index, prop.quote.length)+"\" is a fitting string at the position "+index);
 				});
 			});
 		});
@@ -133,7 +139,7 @@ var util = {
 		var matches = [];
 		var i = 0, j = 0, len = page_content.length;
 		comment = comment+"Ӻ";
-		var nextArray = util.calculateKMPnextArray(comment+"Ӻ");
+		var nextArray = util.calculateKMPnextArray(comment);
 		//iterate through the page_content  
 		while (i < len) {
 			if (page_content[i] != comment[j]) {
