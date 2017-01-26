@@ -123,14 +123,15 @@ var util = {
 				var extracted_comment = util.extractTextBetweenIndexes(tmp, (startOffset+1), endOffset);
 				console.log(extracted_comment+" the comment relating to the saved comment's position");
 				
+				var matches = [];
+				
 				if (prop.quote != extracted_comment) {
-					util.suggestFit(prop.quote, page_content);
+					matches = util.suggestFit(prop.quote, page_content);
 				} else {
 					console.log("Comments fit to the Wiki content")
 				}
 				
-				//Hier rufe ich suggestFit nur zum Test auf
-				var matches = [];
+				//Hier rufe ich suggestFit nur zum Test auf				
 				matches = util.suggestFit(prop.quote, page_content);
 				matches.forEach(function(index) {
 					console.log(page_content[index]+" is a fitting char at the position "+index);
