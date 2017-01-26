@@ -14,5 +14,8 @@ var annotationsStore = {
 
     init: function (data) {
         this.annotations = data;
+		$(document).ready(function() {
+			util.checkAnnotationPosition(data);
+		});
     }
 };

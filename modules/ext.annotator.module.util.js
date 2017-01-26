@@ -79,5 +79,108 @@ var util = {
     extractTextBetweenRegexes: function (text, regex_start, regex_end) {
         text = util.sliceBeforeRegex(text, regex_start);
         return util.sliceAfterRegex(text, regex_end);
-    }
+    },
+	
+	extractTextBetweenIndexes: function (text, index_start, index_end) {
+		return text.substring(index_start, index_end);
+	},
+	
+	checkAnnotationPosition: function (annotations) {
+		annotations.forEach(function(prop) {
+			
+			var page_name = mw.config.get('wgPageName');
+			var end = prop.ranges[0].end;
+			var endOffset = prop.ranges[0].endOffset;
+			var start = prop.ranges[0].start;
+			var startOffset = prop.ranges[0].startOffset;		
+			
+			api.getPageContent(page_name, function (page_content) {
+				console.log(page_content);
+				
+				var tmp = "", maxCounter = 500;
+				console.log("//*[@class=\"annotator-wrapper\"]"+start+" XPath")
+				
+				/* this while is for trying to receive the specific content multiple times 
+				because sometimes however the XPath does not work correctly
+				document.addEventListener("DOMContentLoaded", function(event) {
+					console.log("drin");
+					tmp = util.getElementByXpath(start);
+					tmp = tmp.stringValue;
+				});*/
+				
+				
+				while (tmp.length < 1 && maxCounter > 0) {
+						tmp = util.getElementByXpath(start);
+						tmp = tmp.stringValue;
+						maxCounter--;
+						if (maxCounter == 0) {
+							console.log("unable to read the page content")
+						}
+				}
+			
+				console.log(tmp+" some part of content containing the comment relating to its saved position");
+				
+				var extracted_comment = util.extractTextBetweenIndexes(tmp, (startOffset+1), endOffset);
+				console.log(extracted_comment+" the comment relating to the saved comment's position");
+				
+				if (prop.quote != extracted_comment) {
+					util.suggestFit(prop.quote, page_content);
+				} else {
+					console.log("Comments fit to the Wiki content")
+				}
+				
+				//Hier rufe ich suggestFit nur zum Test auf
+				var matches = [];
+				matches = util.suggestFit(prop.quote, page_content);
+				matches.forEach(function(index) {
+					console.log(page_content[index]+" is a fitting char at the position "+index);
+				});
+				
+				//callback();
+			});
+		});
+	},
+	
+	/*Return an array which contains indexes of the first letters for fitting patterns in the page-content*/
+	suggestFit: function (comment, page_content) {
+		var matches = [];
+		var i = 0, j = 0, len = page_content.length;
+		comment = comment+"Ӻ";
+		var nextArray = util.calculateKMPnextArray(comment+"Ӻ");
+		//iterate through the page_content  
+		while (i < len) {
+			if (page_content[i] != comment[j]) {
+				i = i + (nextArray[j]+1);
+				j = 0;
+			} else {
+				i++;
+				j++;
+				if (j == comment.length-1) {
+					matches.push(i-comment.length+1);
+				}
+			}
+		}
+		return matches;
+	},
+	
+	calculateKMPnextArray: function (comment) {
+		var pointer = 0;
+		var next = [];
+		next.push(pointer);
+		for (i = 1; i < comment.length; i++) {
+			pointer++;
+			if (comment[i] == comment[pointer-1]) {
+				next.push(next[pointer-1]);
+			} else {
+				next.push(pointer);
+				pointer = 0;
+			}
+		}
+		return next;
+	},
+	
+	 getElementByXpath: function (path) {
+		// return the Elements (String) by its XPath by building the relative XPath with its root on the annotator-wrapper
+		return document.evaluate("//*[@class=\"annotator-wrapper\"]"+path, document, null, XPathResult.STRING_TYPE, null);
+	}
 };
