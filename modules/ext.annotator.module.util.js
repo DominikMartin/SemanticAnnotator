@@ -92,52 +92,38 @@ var util = {
 			var end = prop.ranges[0].end;
 			var endOffset = prop.ranges[0].endOffset;
 			var start = prop.ranges[0].start;
-			var startOffset = prop.ranges[0].startOffset;		
-			
+			var startOffset = prop.ranges[0].startOffset;
+
+			var rootNode = document.getElementsByClassName("annotator-wrapper")[0];
+
+			var startNode = Annotator.Range.nodeFromXPath(start, rootNode);
+			console.log(startNode);
+
 			api.getPageContent(page_name, function (page_content) {
-				console.log(page_content);
-				
-				var tmp = "", maxCounter = 500;
-				console.log("//*[@class=\"annotator-wrapper\"]"+start+" XPath")
-				
-				/* this while is for trying to receive the specific content multiple times 
-				because sometimes however the XPath does not work correctly
-				document.addEventListener("DOMContentLoaded", function(event) {
-					console.log("drin");
-					tmp = util.getElementByXpath(start);
-					tmp = tmp.stringValue;
-				});*/
-				
-				
-				while (tmp.length < 1 && maxCounter > 0) {
-						tmp = util.getElementByXpath(start);
-						tmp = tmp.stringValue;
-						maxCounter--;
-						if (maxCounter == 0) {
-							console.log("unable to read the page content")
-						}
-				}
-			
-				console.log(tmp+" some part of content containing the comment relating to its saved position");
-				
-				var extracted_comment = util.extractTextBetweenIndexes(tmp, (startOffset+1), endOffset);
-				console.log(extracted_comment+" the comment relating to the saved comment's position");
+				var startNode = Annotator.Range.nodeFromXPath(start, rootNode);
+				//var startElement = util.getElementByXpath(start);
+				var startElementString = startNode.innerText; //startElement.stringValue;
+				// TODO: check if text or html is saved from annotator
+
+				// TODO: Zusätzlich noch endElement falls Comment über mehrere Abschnitte geht
+
+				var extracted_comment = util.extractTextBetweenIndexes(startElementString, startOffset, endOffset);
+				console.log("\"" + extracted_comment + "\" is part relating to the saved quote's position");
 				
 				var matches = [];
 				
 				if (prop.quote != extracted_comment) {
+					console.log("=> Quote does NOT fit to the Wiki content");
 					matches = util.suggestFit(prop.quote, page_content);
 				} else {
-					console.log("Comments fit to the Wiki content")
+					console.log("=> Quote fits to the Wiki content")
 				}
 				
 				//Hier rufe ich suggestFit nur zum Test auf				
-				matches = util.suggestFit(prop.quote, page_content);
+				//matches = util.suggestFit(prop.quote, page_content);
 				matches.forEach(function(index) {
-					console.log(page_content[index]+" is a fitting char at the position "+index);
+					console.log(page_content.substr(index, prop.quote.length)+" is a fitting string at the position "+index);
 				});
-				
-				//callback();
 			});
 		});
 	},

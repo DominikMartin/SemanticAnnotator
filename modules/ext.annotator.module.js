@@ -20,6 +20,9 @@
 					categories[results[prop].printouts['SA Category Name'][0]] = 'annotator-hl-'+results[prop].printouts['SA Category Color'][0];
 				});
 				initAnnotator(categories);
+
+				// Execute after COMPLETE Annotator is loaded so annotation-wrapper node exists!
+				util.checkAnnotationPosition(annotationsStore.annotations);
 			});
 		})
 		.fail(function() {
