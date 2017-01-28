@@ -95,15 +95,13 @@ Annotator.Plugin.MediaWiki = function (element) {
 
     plugin.setPopupContent = function(annotation) {
         var iframeContent = $("iframe").contents();
+
         // Replace body content by only the form part
         iframeContent.find("body").html( iframeContent.find("#content") );
+
         // CSS adjustments
         iframeContent.find("#content").css("border", "none");
         iframeContent.find("#content").css("margin", 0);
-
-        // TODO: append comment, category, annotation metadata and annotation type
-        //iframeContent.find("#comment").val(annotation.text);
-        //iframeContent.find('input[name="TextAnnotation[AnnotationOf]"]').val(mw.config.get('wgPageName'));
 
         var annotationOfField = iframeContent.find('input[name="TextAnnotation[AnnotationOf]"]');
         annotationOfField.val(mw.config.get('wgPageName'));
@@ -113,13 +111,13 @@ Annotator.Plugin.MediaWiki = function (element) {
         annotationCommentField.val(annotation.text);
         annotationCommentField.closest('tr').css('display', 'none');
 
-        var annotationOfField = iframeContent.find('input[name="TextAnnotation[LastModificationDate]"]');
-        annotationOfField.val(new Date(new Date(mw.now()).getTime() - (new Date(mw.now()).getTimezoneOffset() * 60000)).toISOString());
-        annotationOfField.closest('tr').css('display', 'none');
+        var lastModificationDateField = iframeContent.find('input[name="TextAnnotation[LastModificationDate]"]');
+        lastModificationDateField.val(new Date(new Date(mw.now()).getTime() - (new Date(mw.now()).getTimezoneOffset() * 60000)).toISOString());
+        lastModificationDateField.closest('tr').css('display', 'none');
 
-        var annotationOfField = iframeContent.find('input[name="TextAnnotation[LastModificationUser]"]');
-        annotationOfField.val('User:'+mw.user.getName());
-        annotationOfField.closest('tr').css('display', 'none');
+        var lastModificationUserField = iframeContent.find('input[name="TextAnnotation[LastModificationUser]"]');
+        lastModificationUserField.val('User:'+mw.user.getName());
+        lastModificationUserField.closest('tr').css('display', 'none');
 
         var annotationMetadataField = iframeContent.find('input[name="TextAnnotation[AnnotationMetadata]"]');
         annotationMetadataField.val(util.fromJsonToEscaped(annotation));
