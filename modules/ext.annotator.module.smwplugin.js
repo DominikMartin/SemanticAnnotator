@@ -11,38 +11,10 @@ Annotator.Plugin.MediaWiki = function (element) {
                 annotation.id = util.randomName(10);
             })
             .subscribe("annotationCreated", function (annotation) {
-                tempAnnotation = annotation;
-
-                var category_form = categoriesMap[annotation.category].replace(/\w+:/g, '');
-                var url = mw.config.get('wgScript')
-                    + '/Special:FormEdit/'
-                    + category_form
-                    + '/Annotation:'
-                    + mw.config.get('wgPageName')
-                    + '/' + annotation.id;
-
-                plugin.openPopup(url, function () {
-                    plugin.afterCreation(annotation);
-                });
-
-                // TODO: check if tempAnnotation was created correctly
+                plugin.afterCreation(annotation);
             })
             .subscribe("annotationUpdated", function (annotation) {
-                tempAnnotation = annotation;
-
-                var category_form = categoriesMap[annotation.category].replace(/\w+:/g, '');
-                var url = mw.config.get('wgScript')
-                    + '/Special:FormEdit/'
-                    + category_form
-                    + '/Annotation:'
-                    + mw.config.get('wgPageName')
-                    + '/' + annotation.id;
-
-                plugin.openPopup(url, function () {
-                    plugin.afterUpdate(annotation);
-                });
-
-                // TODO: check if tempAnnotation was updated correctly
+                plugin.afterUpdate(annotation);
             })
             .subscribe("annotationDeleted", function (annotation) {
                 var getTokenUrl = mw.config.get('wgScriptPath')+'/api.php?action=query&meta=tokens&format=json';
@@ -54,11 +26,19 @@ Annotator.Plugin.MediaWiki = function (element) {
     };
 
     plugin.afterCreation = function (annotation) {
-        plugin.setPopupContent(annotation);
+        plugin.annotationPageForm(annotation);
+
+        // TODO: if first annotation: build overview site
     };
 
     plugin.afterUpdate = function (annotation) {
-        plugin.setPopupContent(annotation);
+        plugin.annotationPageForm(annotation);
+    };
+
+    plugin.afterPopupCancel = function (annotation) {
+        if(!plugin.annotationSaved){
+            this.annotator.deleteAnnotation(annotation);
+        }
     };
 
     plugin.loadAnnotationsFromLocalVar = function () {
@@ -69,15 +49,32 @@ Annotator.Plugin.MediaWiki = function (element) {
         }
     };
 
-    plugin.openPopup = function(url, afterContentFunction) {
+    plugin.annotationPageForm = function(annotation) {
+        var category_form = categoriesMap[annotation.category].replace(/\w+:/g, '');
+        var url = mw.config.get('wgScript')
+            + '/Special:FormEdit/'
+            + category_form
+            + '/Annotation:'
+            + mw.config.get('wgPageName')
+            + '/' + annotation.id;
+
+        plugin.openPopup(url, annotation);
+    };
+
+    plugin.openPopup = function(url, annotation) {
         $.featherlight(
             {
                 iframe: url,
                 iframeMaxWidth: '100%',
                 iframeWidth: 800,
-                iframeHeight: 600,
+                iframeHeight: 400,
                 // SET CONFIG HERE
-                afterContent: afterContentFunction
+                afterContent: function () {
+                    plugin.setPopupContent(annotation);
+                },
+                afterClose: function () {
+                    plugin.afterPopupCancel(annotation);
+                }
             });
     };
 
@@ -88,21 +85,37 @@ Annotator.Plugin.MediaWiki = function (element) {
         // CSS adjustments
         iframeContent.find("#content").css("border", "none");
         iframeContent.find("#content").css("margin", 0);
-        // auto scale popup
-        $("iframe").width(iframeContent.find("#content").width());
-        $("iframe").height(iframeContent.find("#content").height()+40);
+
         // TODO: append comment, category, annotation metadata and annotation type
         //iframeContent.find("#comment").val(annotation.text);
-        iframeContent.find('input[name="TextAnnotation[AnnotationOf]"]').val(mw.config.get('wgPageName'));
-        iframeContent.find('textarea[name="TextAnnotation[AnnotationComment]"]').val(annotation.text);
-        iframeContent.find('textarea[name="TextAnnotation[AnnotationMetadata]"]').val(util.fromJsonToEscaped(annotation));
+        //iframeContent.find('input[name="TextAnnotation[AnnotationOf]"]').val(mw.config.get('wgPageName'));
+
+        var annotationOfField = iframeContent.find('input[name="TextAnnotation[AnnotationOf]"]');
+        annotationOfField.val(mw.config.get('wgPageName'));
+        annotationOfField.closest('tr').css('display', 'none');
+
+        var annotationCommentField = iframeContent.find('textarea[name="TextAnnotation[AnnotationComment]"]');
+        annotationCommentField.val(annotation.text);
+
+        var annotationMetadataField = iframeContent.find('textarea[name="TextAnnotation[AnnotationMetadata]"]');
+        annotationMetadataField.val(util.fromJsonToEscaped(annotation));
+        annotationMetadataField.closest('tr').css('display', 'none');
+
+        // auto scale popup
+        $("iframe").width(iframeContent.find("#content").width());
+        $("iframe").height(iframeContent.find("#content").height()+75);
+
         // append save functionality
         iframeContent.find("#wpSave").click(function() {
-            closeIframe();
+            plugin.annotationSaved = true;
+            $.featherlight.current().close();
+        });
+        iframeContent.find(".editHelp > a").click(function() {
+            $.featherlight.current().close();
         });
     };
 
+    plugin.annotationSaved = false;
+
     return plugin;
 };
-
-var tempAnnotation = {};

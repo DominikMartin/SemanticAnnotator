@@ -61,7 +61,3 @@ function initAnnotator(){
 
 var categoriesMap = new Object();
 var categories;
-
-function closeIframe() {
-    $.featherlight.current().close();
-}
