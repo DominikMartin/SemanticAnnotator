@@ -56,6 +56,12 @@ class SemanticAnnotatorSpecial extends SpecialPage {
         // - AnnotationComment:Text
         $text = '[[Has type::Text]]';
         self::editPage( 'Property:AnnotationComment', $text );
+        // - LastModificationDate:Date
+        $text = '[[Has type::Date]]';
+        self::editPage( 'Property:LastModificationDate', $text );
+        // - LastModificationUser:Page
+        $text = '[[Has type::Page]]';
+        self::editPage( 'Property:LastModificationUser', $text );
         // - AnnotationMetadata:Sourcecode
         $text = '[[Has type::Code]]';
         self::editPage( 'Property:AnnotationMetadata', $text );
@@ -78,6 +84,8 @@ class SemanticAnnotatorSpecial extends SpecialPage {
         $text .= '{{TextAnnotation'."\n";
         $text .= '|AnnotationOf='."\n";
         $text .= '|AnnotationComment='."\n";
+        $text .= '|LastModificationDate='."\n";
+        $text .= '|LastModificationUser='."\n";
         $text .= '|AnnotationMetadata='."\n";
         $text .= '}}'."\n";
         $text .= '</pre>'."\n";
@@ -88,6 +96,12 @@ class SemanticAnnotatorSpecial extends SpecialPage {
         $text .= '|-'."\n";
         $text .= '! Annotation Comment'."\n";
         $text .= '| [[AnnotationComment::{{{AnnotationComment|}}}]] '."\n";
+        $text .= '|-'."\n";
+        $text .= '! Last Modification Date'."\n";
+        $text .= '| [[LastModificationDate::{{{LastModificationDate|}}}]] '."\n";
+        $text .= '|-'."\n";
+        $text .= '! Last Modification User'."\n";
+        $text .= '| [[LastModificationUser::{{{LastModificationUser|}}}]] '."\n";
         $text .= '|-'."\n";
         $text .= '! Annotation Metadata'."\n";
         $text .= '| [[AnnotationMetadata::{{{AnnotationMetadata|}}}]] '."\n";
@@ -105,13 +119,19 @@ class SemanticAnnotatorSpecial extends SpecialPage {
         $text .= '{{{for template|TextAnnotation}}}'."\n";
         $text .= '{| class="formtable"'."\n";
         $text .= '! AnnotationOf: '."\n";
-        $text .= '| {{{field|AnnotationOf}}}'."\n";
+        $text .= '| {{{field|AnnotationOf|hidden}}}'."\n";
         $text .= '|-'."\n";
         $text .= '! AnnotationComment: '."\n";
-        $text .= '| {{{field|AnnotationComment}}}'."\n";
+        $text .= '| {{{field|AnnotationComment|hidden}}}'."\n";
+        $text .= '|-'."\n";
+        $text .= '! LastModificationDate: '."\n";
+        $text .= '| {{{field|LastModificationDate|hidden}}}'."\n";
+        $text .= '|-'."\n";
+        $text .= '! LastModificationUser: '."\n";
+        $text .= '| {{{field|LastModificationUser|hidden}}}'."\n";
         $text .= '|-'."\n";
         $text .= '! AnnotationMetadata: '."\n";
-        $text .= '| {{{field|AnnotationMetadata}}}'."\n";
+        $text .= '| {{{field|AnnotationMetadata|hidden}}}'."\n";
         $text .= '|}'."\n";
         $text .= '{{{end template}}}'."\n";
         $text .= '\'\'\'Free text:\'\'\''."\n";

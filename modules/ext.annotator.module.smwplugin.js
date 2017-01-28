@@ -34,6 +34,8 @@ Annotator.Plugin.MediaWiki = function (element) {
                     +'{{#ask:\n'
                     +'[[Category:TextAnnotation]]\n'
                     +'|?AnnotationComment\n'
+                    +'|?LastModificationUser\n'
+                    +'|?LastModificationDate\n'
                     +'|?Category\n'
                     +'|mainlabel=Annotation\n'
                     +'|format=table\n'
@@ -107,10 +109,19 @@ Annotator.Plugin.MediaWiki = function (element) {
         annotationOfField.val(mw.config.get('wgPageName'));
         annotationOfField.closest('tr').css('display', 'none');
 
-        var annotationCommentField = iframeContent.find('textarea[name="TextAnnotation[AnnotationComment]"]');
+        var annotationCommentField = iframeContent.find('input[name="TextAnnotation[AnnotationComment]"]');
         annotationCommentField.val(annotation.text);
+        annotationCommentField.closest('tr').css('display', 'none');
 
-        var annotationMetadataField = iframeContent.find('textarea[name="TextAnnotation[AnnotationMetadata]"]');
+        var annotationOfField = iframeContent.find('input[name="TextAnnotation[LastModificationDate]"]');
+        annotationOfField.val(new Date(new Date(mw.now()).getTime() - (new Date(mw.now()).getTimezoneOffset() * 60000)).toISOString());
+        annotationOfField.closest('tr').css('display', 'none');
+
+        var annotationOfField = iframeContent.find('input[name="TextAnnotation[LastModificationUser]"]');
+        annotationOfField.val('User:'+mw.user.getName());
+        annotationOfField.closest('tr').css('display', 'none');
+
+        var annotationMetadataField = iframeContent.find('input[name="TextAnnotation[AnnotationMetadata]"]');
         annotationMetadataField.val(util.fromJsonToEscaped(annotation));
         annotationMetadataField.closest('tr').css('display', 'none');
 
