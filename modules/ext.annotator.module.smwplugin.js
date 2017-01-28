@@ -54,45 +54,11 @@ Annotator.Plugin.MediaWiki = function (element) {
     };
 
     plugin.afterCreation = function (annotation) {
-        var iframeContent = $("iframe").contents();
-        // Replace body content by only the form part
-		iframeContent.find("body").html( iframeContent.find("#content") );
-        // CSS adjustments
-		iframeContent.find("#content").css("border", "none");
-		iframeContent.find("#content").css("margin", 0);
-        // auto scale popup
-		$("iframe").width(iframeContent.find("#content").width());
-		$("iframe").height(iframeContent.find("#content").height()+40);
-        // TODO: append comment, category, annotation metadata and annotation type
-        //iframeContent.find("#comment").val(annotation.text);
-        iframeContent.find('input[name="TextAnnotation[AnnotationOf]"]').val(mw.config.get('wgPageName'));
-        iframeContent.find('textarea[name="TextAnnotation[AnnotationComment]"]').val(annotation.text);
-        iframeContent.find('textarea[name="TextAnnotation[AnnotationMetadata]"]').val(util.fromJsonToEscaped(annotation));
-        // append save functionality
-		iframeContent.find("#wpSave").click(function() {
-			closeIframe();
-		});
+        plugin.setPopupContent(annotation);
     };
 
     plugin.afterUpdate = function (annotation) {
-        var iframeContent = $("iframe").contents();
-        // Replace body content by only the form part
-        iframeContent.find("body").html( iframeContent.find("#content") );
-        // CSS adjustments
-        iframeContent.find("#content").css("border", "none");
-        iframeContent.find("#content").css("margin", 0);
-        // auto scale popup
-        $("iframe").width(iframeContent.find("#content").width());
-        $("iframe").height(iframeContent.find("#content").height()+40);
-        // TODO: append comment, category, annotation metadata and annotation type
-        //iframeContent.find("#comment").val(annotation.text);
-        iframeContent.find('input[name="TextAnnotation[AnnotationOf]"]').val(mw.config.get('wgPageName'));
-        iframeContent.find('textarea[name="TextAnnotation[AnnotationComment]"]').val(annotation.text);
-        iframeContent.find('textarea[name="TextAnnotation[AnnotationMetadata]"]').val(util.fromJsonToEscaped(annotation));
-        // append save functionality
-        iframeContent.find("#wpSave").click(function() {
-            closeIframe();
-        });
+        plugin.setPopupContent(annotation);
     };
 
     plugin.loadAnnotationsFromLocalVar = function () {
@@ -113,6 +79,27 @@ Annotator.Plugin.MediaWiki = function (element) {
                 // SET CONFIG HERE
                 afterContent: afterContentFunction
             });
+    };
+
+    plugin.setPopupContent = function(annotation) {
+        var iframeContent = $("iframe").contents();
+        // Replace body content by only the form part
+        iframeContent.find("body").html( iframeContent.find("#content") );
+        // CSS adjustments
+        iframeContent.find("#content").css("border", "none");
+        iframeContent.find("#content").css("margin", 0);
+        // auto scale popup
+        $("iframe").width(iframeContent.find("#content").width());
+        $("iframe").height(iframeContent.find("#content").height()+40);
+        // TODO: append comment, category, annotation metadata and annotation type
+        //iframeContent.find("#comment").val(annotation.text);
+        iframeContent.find('input[name="TextAnnotation[AnnotationOf]"]').val(mw.config.get('wgPageName'));
+        iframeContent.find('textarea[name="TextAnnotation[AnnotationComment]"]').val(annotation.text);
+        iframeContent.find('textarea[name="TextAnnotation[AnnotationMetadata]"]').val(util.fromJsonToEscaped(annotation));
+        // append save functionality
+        iframeContent.find("#wpSave").click(function() {
+            closeIframe();
+        });
     };
 
     return plugin;
