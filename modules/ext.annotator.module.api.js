@@ -25,7 +25,11 @@ var api = {
         var url = mw.config.get('wgScriptPath')+'/api.php?action=query&prop=revisions&rvprop=content&format=json&titles='+pagename;
         $.getJSON(url, function(json) {
             pid = Object.keys(json.query.pages)[0];
-            callback(json.query.pages[pid].revisions[0]['*']);
+            if(pid != -1){
+                callback(json.query.pages[pid].revisions[0]['*']);
+            }else{
+                callback('');
+            }
         });
     },
 
@@ -41,6 +45,12 @@ var api = {
             .always(function() {
                 callback();
             });
+        });
+    },
+
+    deletePage: function (url) {
+        this.getToken(function (token) {
+            $.post(url, { token: token });
         });
     }
 };

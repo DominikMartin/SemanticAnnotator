@@ -17,18 +17,31 @@ Annotator.Plugin.MediaWiki = function (element) {
                 plugin.afterUpdate(annotation);
             })
             .subscribe("annotationDeleted", function (annotation) {
-                var getTokenUrl = mw.config.get('wgScriptPath')+'/api.php?action=query&meta=tokens&format=json';
-                $.getJSON(getTokenUrl, function(json) {
-                    var postDeleteUrl = mw.config.get('wgScriptPath')+'/api.php?action=delete&title=Annotation:'+mw.config.get('wgPageName')+'/'+annotation.id;
-                    $.post(postDeleteUrl, { token: json.query.tokens.csrftoken });
-                });
+                var postDeleteUrl = mw.config.get('wgScriptPath')+'/api.php?action=delete&title=Annotation:'
+                    +mw.config.get('wgPageName')+'/'+annotation.id;
+                api.deletePage(postDeleteUrl);
             });
     };
 
     plugin.afterCreation = function (annotation) {
         plugin.annotationPageForm(annotation);
 
-        // TODO: if first annotation: build overview site
+        api.getPageContent('Annotation:'+mw.config.get('wgPageName'), function (content) {
+            if(content.length < 1){
+                var page_content = mw.msg('annotation-main-page-description')
+                    +' [['+mw.config.get('wgPageName')+']].\n\n'
+                    +'=='+mw.msg('annotations')+'==\n'
+                    +'{{#ask:\n'
+                    +'[[Category:TextAnnotation]]\n'
+                    +'|?AnnotationComment\n'
+                    +'|?Category\n'
+                    +'|mainlabel=Annotation\n'
+                    +'|format=table\n'
+                    +'}}';
+
+                api.createPage('Annotation:'+mw.config.get('wgPageName'), page_content);
+            }
+        })
     };
 
     plugin.afterUpdate = function (annotation) {

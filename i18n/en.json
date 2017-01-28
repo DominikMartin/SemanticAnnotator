@@ -33,5 +33,7 @@
 	"yellow": "yellow",
 	"green": "green",
 	"blue": "blue",
-	"grey": "grey"
+	"grey": "grey",
+	"annotation-main-page-description": "This Page shows all Annotations of the Article",
+	"annotations": "Annotations"
 }

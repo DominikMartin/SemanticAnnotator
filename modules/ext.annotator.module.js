@@ -4,7 +4,11 @@
  */
 
 ( function () {
-	var url = mw.config.get('wgScriptPath')+'/api.php?action=ask&query=[[Category:TextAnnotation]][[Annotation of::'+mw.config.get('wgPageName')+']]|?AnnotationComment|?AnnotationMetadata&format=json';
+	var url = mw.config.get('wgScriptPath')
+		+'/api.php?action=ask&query='
+		+'[[Category:TextAnnotation]]'
+		+'[[Annotation of::'+mw.config.get('wgPageName')+']]'
+		+'|?AnnotationComment|?AnnotationMetadata&format=json';
 	$.getJSON(url, function(json) {
 		var annotations = util.parseAskApiCall(json);
 		annotationsStore.init(annotations);

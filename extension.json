@@ -80,7 +80,10 @@
 				"modules/lib/featherlight.min.css",
 				"modules/lib/plugins/annotator_view/css/style.css"
 			],
-			"messages": [],
+			"messages": [
+				"annotation-main-page-description",
+				"annotations"
+			],
 			"dependencies": []
 		},
 		"ext.annotator.special": {
