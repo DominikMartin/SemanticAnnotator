@@ -86,6 +86,7 @@ function printTable(categories) {
 }
 
 function deleteCategoryPageFormAssignment(name, form, color){
+    appendLoadingSpinner();
     api.getPageContent(form, function (old_form_content) {
         old_form_content = old_form_content.replace('[[Form Type::SemanticAnnotator]][[SA Category Name::'+name+']][[SA Category Color::'+color+']]\n', '');
         // TODO: remove text annotation template
@@ -99,6 +100,7 @@ function buildCategoryPageFormAssignment(name, form, color){
     if(name.length < 1 || form.length < 1){
         return;
     }
+    appendLoadingSpinner();
     api.getPageContent(form, function (new_form_content) {
         api.getPageContent('Form:TextAnnotation', function (sa_form_content) {
             var regex_start = /\{\{\{for template\|TextAnnotation}}}/g;
@@ -113,4 +115,8 @@ function buildCategoryPageFormAssignment(name, form, color){
             });
         });
     });
+}
+
+function appendLoadingSpinner() {
+    $('body').append('<div class="annotator-loading"><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>');
 }
