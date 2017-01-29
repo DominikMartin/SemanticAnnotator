@@ -70,6 +70,7 @@
 				"modules/lib/plugins/annotator_view/search.js",
 				"modules/lib/plugins/annotator_view/locale/en/annotator.js",
 				"modules/ext.annotator.module.smwplugin.js",
+				"modules/ext.annotator.repair.js",
 				"modules/ext.annotator.module.api.js",
 				"modules/ext.annotator.module.util.js",
 				"modules/ext.annotator.module.store.js",
@@ -82,9 +83,34 @@
 			],
 			"messages": [
 				"annotation-main-page-description",
-				"annotations"
+				"annotations",
+				"annotate-repair-notification",
+				"annotate-repair-button-text",
+				"annotate-repair-button-desc"
 			],
 			"dependencies": []
+		},
+		"ext.annotator.repair": {
+			"scripts": [
+				"modules/lib/sweetalert2.min.js"
+			],
+			"styles": [
+				"modules/lib/sweetalert2.min.css",
+				"modules/ext.annotator.repair.css"
+			],
+			"messages": [
+				"repair-welcome-title",
+				"repair-welcome-text",
+				"repair-annotation-info-title",
+				"repair-annotation-info-text",
+				"annotation-article-link",
+				"repair-done-title",
+				"repair-done-text",
+				"repair",
+				"skip",
+				"repair-all-done-title",
+				"repair-all-done-text"
+			]
 		},
 		"ext.annotator.special": {
 			"scripts": [

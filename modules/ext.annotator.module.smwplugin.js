@@ -115,7 +115,7 @@ Annotator.Plugin.MediaWiki = function (element) {
         annotationCommentField.closest('tr').css('display', 'none');
 
         var lastModificationDateField = iframeContent.find('input[name="TextAnnotation[LastModificationDate]"]');
-        lastModificationDateField.val(new Date(new Date(mw.now()).getTime() - (new Date(mw.now()).getTimezoneOffset() * 60000)).toISOString());
+        lastModificationDateField.val(util.formatDate(mw.now()));
         lastModificationDateField.closest('tr').css('display', 'none');
 
         var lastModificationUserField = iframeContent.find('input[name="TextAnnotation[LastModificationUser]"]');
@@ -144,16 +144,23 @@ Annotator.Plugin.MediaWiki = function (element) {
         var rootNode = document.getElementsByClassName("annotator-wrapper")[0];
         var annotator = $('#content').annotator().annotator().data('annotator');
 
-        var count = 0;
         annotations.forEach(function(annotation) {
             if(plugin.annotationMoved(annotation, rootNode)){
                 console.log(annotation);
                 annotationsStore.remove(annotation);
-                count++;
             }
         });
 
-        mw.notify( count + ' Annotations were deleted.' );
+        if(annotationsStore.removedAnnotations.length > 0){
+            mw.notify( mw.msg('annotate-repair-notification'), { autoHide: false } );
+            $('#p-views>ul').append('<li id="ca-annotate-repair"><span><a href="#" title="'+mw.msg('annotate-repair-button-desc')+'" accesskey="a">'+mw.msg('annotate-repair-button-text')+'</a><i class="fa fa-check" aria-hidden="true"></i></span></li>');
+            $('#ca-annotate-repair').click(function() {
+                mw.loader.using( 'ext.annotator.repair' ).then( function () {
+                    $( '#ca-annotate-repair' ).addClass( 'selected' );
+                    startRepairMode(annotationsStore);
+                } );
+            });
+        }
     };
 
     plugin.annotationMoved = function (annotation, rootNode) {

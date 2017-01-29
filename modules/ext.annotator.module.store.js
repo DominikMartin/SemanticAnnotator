@@ -1,6 +1,7 @@
 var annotationsStore = {
 
     annotations:[],
+    removedAnnotations:[],
 
     append: function (annotation) {
         if(!annotation.hasOwnProperty('id'))
@@ -16,6 +17,7 @@ var annotationsStore = {
         this.annotations = $.grep(this.annotations, function(value) {
             return value.id != annotation.id;
         });
+        this.removedAnnotations.push(annotation);
     },
 
     init: function (data) {

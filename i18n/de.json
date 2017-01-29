@@ -12,6 +12,9 @@
 	"annotator-special-intro": "Willkommen auf der Spezialseite der Erweiterung „SemanticAnnotator“.",
 	"annotate-button-text": "Annotieren",
 	"annotate-button-desc": "Klicken Sie hier um den Artikel annotieren zu können.",
+	"annotate-repair-button-text": "Annotations-Reparatur",
+	"annotate-repair-button-desc": "Klicken Sie hier um veränderte Annotationen zu reparieren.",
+	"annotate-repair-notification": "Es konnten nicht alle Annotationen korrekt zugeordnet werden. Bitte starten Sie den Annotations-Reparatur Modus.",
 	"annotate-icon-desc": "Annotator Status",
 	"annotate-welcome-message": "Annotator Modus gestartet...",
 	"annotate-godbye-message": "Annotator Modus beendet...",
@@ -35,5 +38,16 @@
 	"blue": "blau",
 	"grey": "grau",
 	"annotation-main-page-description": "Diese Seite zeigt alle Anotationen des Artikels",
-	"annotations": "Annotationen"
+	"annotations": "Annotationen",
+	"repair-welcome-title": "Welcome to Repair Mode",
+	"repair-welcome-text": "In the following steps you are able to correct the moved annotation positions.",
+	"repair-annotation-info-title": "Annotation Info",
+	"repair-annotation-info-text": "After clicking Repair you have to select the annotations new position.",
+	"annotation-article-link": "Annotation Article Page",
+	"repair-done-title": "Done!",
+	"repair-done-text": "Annotations position is updated.",
+	"repair": "Repair",
+	"skip": "Skip",
+	"repair-all-done-title": "Repair Mode finished",
+	"repair-all-done-text": "Now you will be redirected to the article page."
 }

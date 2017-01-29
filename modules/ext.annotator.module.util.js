@@ -80,6 +80,10 @@ var util = {
         text = util.sliceBeforeRegex(text, regex_start);
         return util.sliceAfterRegex(text, regex_end);
     },
+
+    formatDate: function (date) {
+      return new Date(new Date(date).getTime() - (new Date(date).getTimezoneOffset() * 60000)).toISOString();
+    },
 	
 	extractTextBetweenIndexes: function (text, index_start, index_end) {
 		return $.trim(text.substring(index_start, index_end));
