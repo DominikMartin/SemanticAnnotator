@@ -69,10 +69,10 @@ Annotator.Plugin.Search = (function (_super) {
 
         this.annotator.subscribe("annotationDeleted", this.removeDocument);
 
-        this.annotator.subscribe("annotationUpdated", function (annotation) {
+        this.annotator.subscribe("annotationUpdated", (function (annotation) {
                 this.removeDocument(annotation);
                 this.addDocument(annotation);
-            });
+            }).bind(this));
 
         //Adding search capabilities to the annotator Viewer
         if (typeof(this.annotator.plugins.AnnotatorViewer)!='undefined') {
