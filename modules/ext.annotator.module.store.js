@@ -12,6 +12,12 @@ var annotationsStore = {
         this.annotations.push(annotation);
     },
 
+    remove: function (annotation) {
+        this.annotations = $.grep(this.annotations, function(value) {
+            return value.id != annotation.id;
+        });
+    },
+
     init: function (data) {
         this.annotations = data;
     }

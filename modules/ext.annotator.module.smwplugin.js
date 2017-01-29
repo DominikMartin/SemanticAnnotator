@@ -58,6 +58,9 @@ Annotator.Plugin.MediaWiki = function (element) {
 
     plugin.loadAnnotationsFromLocalVar = function () {
         console.info("Load existing annotations...");
+        console.info("checking for moved annotations...");
+        plugin.checkForMovedAnnotations(annotationsStore.annotations);
+        console.info("Load annotations into annotator...");
         if(annotationsStore.annotations != null && annotationsStore.annotations.length > 0){
             var clone = $.extend(true, [], annotationsStore.annotations);
             this.annotator.loadAnnotations(clone);
@@ -135,6 +138,35 @@ Annotator.Plugin.MediaWiki = function (element) {
         iframeContent.find(".editHelp > a").click(function() {
             $.featherlight.current().close();
         });
+    };
+
+    plugin.checkForMovedAnnotations = function (annotations) {
+        var rootNode = document.getElementsByClassName("annotator-wrapper")[0];
+        var annotator = $('#content').annotator().annotator().data('annotator');
+
+        var count = 0;
+        annotations.forEach(function(annotation) {
+            if(plugin.annotationMoved(annotation, rootNode)){
+                console.log(annotation);
+                annotationsStore.remove(annotation);
+                count++;
+            }
+        });
+
+        mw.notify( count + ' Annotations were deleted.' );
+    };
+
+    plugin.annotationMoved = function (annotation, rootNode) {
+        var range = new Annotator.Range.SerializedRange(annotation.ranges[0]);
+        var currentText = $.trim(range.normalize(rootNode).start.data);
+        var originalText = annotation.quote.substr(0, currentText.length);
+
+        if(originalText != currentText){
+            console.log("-- orig: " + originalText + "\n-- now: " + currentText);
+            console.log("=> Quote does NOT fit to the Wiki content");
+            return true;
+        }
+        return false;
     };
 
     plugin.annotationSaved = false;

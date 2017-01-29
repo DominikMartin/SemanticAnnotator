@@ -82,56 +82,7 @@ var util = {
     },
 	
 	extractTextBetweenIndexes: function (text, index_start, index_end) {
-		// Consider cases in which the user (accidently) marked a previous or following whitespace
-		if (text[index_start] == " ") {
-			index_start++;
-		} else if (text[index_end] == " ") {
-			index_end--;
-		}
-		return text.substring(index_start, index_end);
-	},
-	
-	checkAnnotationPosition: function (annotations) {
-		annotations.forEach(function(prop) {
-			
-			var page_name = mw.config.get('wgPageName');
-			var end = prop.ranges[0].end;
-			var endOffset = prop.ranges[0].endOffset;
-			var start = prop.ranges[0].start;
-			var startOffset = prop.ranges[0].startOffset;
-
-			var rootNode = document.getElementsByClassName("annotator-wrapper")[0];
-
-			var startNode = Annotator.Range.nodeFromXPath(start, rootNode);
-			console.log(startNode);
-
-			api.getPageContent(page_name, function (page_content) {
-				var startNode = Annotator.Range.nodeFromXPath(start, rootNode);
-				//var startElement = util.getElementByXpath(start);
-				var startElementString = startNode.innerText; //startElement.stringValue;
-				// TODO: check if text or html is saved from annotator
-
-				// TODO: Zusätzlich noch endElement falls Comment über mehrere Abschnitte geht
-
-				var extracted_comment = util.extractTextBetweenIndexes(startElementString, startOffset, endOffset);
-				console.log("\"" + extracted_comment + "\" is part relating to the saved quote's position");
-				
-				var matches = [];
-				
-				if (prop.quote != extracted_comment) {
-					console.log("=> Quote does NOT fit to the Wiki content");
-					matches = util.suggestFit(prop.quote, page_content);
-				} else {
-					console.log("=> Quote fits to the Wiki content")
-				}
-				
-				//Hier rufe ich suggestFit nur zum Test auf				
-				//matches = util.suggestFit(prop.quote, page_content);
-				matches.forEach(function(index) {
-					console.log("\""+page_content.substr(index, prop.quote.length)+"\" is a fitting string at the position "+index);
-				});
-			});
-		});
+		return $.trim(text.substring(index_start, index_end));
 	},
 	
 	/*Return an array which contains indexes of the first letters for fitting patterns in the page-content*/
