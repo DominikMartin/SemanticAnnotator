@@ -33,6 +33,7 @@ Annotator.Plugin.MediaWiki = function (element) {
                     +'=='+mw.msg('annotations')+'==\n'
                     +'{{#ask:\n'
                     +'[[Category:TextAnnotation]]\n'
+                    +'[[Annotation of::{{PAGENAME}}]]\n'
                     +'|?AnnotationComment\n'
                     +'|?LastModificationUser\n'
                     +'|?LastModificationDate\n'
